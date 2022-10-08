@@ -1,0 +1,13 @@
+.title-detail-video {
+  text-align: left;
+}
+
+.description-text {
+  text-align: left;
+  white-space: pre-line;
+  max-width: 615px;
+}
+
+.publish-date {
+  text-align: left;
+}

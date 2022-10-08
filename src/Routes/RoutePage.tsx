@@ -9,7 +9,9 @@ const RoutePage: React.FC = () => {
     <Routes>
       <Route path="/" element={<Navigate to="home" />} />
       <Route path="/home" element={<HomePage />} />
-      <Route path="/detail" element={<DetailVideo />} />
+      <Route path="/detail" element={<DetailVideo />}>
+        <Route path=":id" element={<DetailVideo />} />
+      </Route>
       <Route path="/search" element={<SearchPage />}>
         <Route path=":keyword" element={<SearchPage />} />
       </Route>

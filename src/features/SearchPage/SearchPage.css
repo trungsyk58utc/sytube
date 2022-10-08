@@ -4,6 +4,7 @@
 
 .title {
   text-align: left;
+  cursor: pointer;
 }
 
 .channel-title {
@@ -12,4 +13,8 @@
 
 .description {
   text-align: left;
+}
+
+.img-interface {
+  cursor: pointer;
 }
