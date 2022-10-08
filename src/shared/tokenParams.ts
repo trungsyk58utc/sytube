@@ -1,2 +1,2 @@
-const accesstoken = "AIzaSyCJtat8DqOkXWzGW-7OrxwXjIF82jNS9IQ";
-export const params = { key: accesstoken };
+export const accesstoken = "AIzaSyCzL0yXVHBAF1G_29YtA7xy1IhYgV5muPw";
+// export const params = { key: accesstoken };

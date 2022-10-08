@@ -11,7 +11,7 @@ const RoutePage: React.FC = () => {
       <Route path="/home" element={<HomePage />} />
       <Route path="/detail" element={<DetailVideo />} />
       <Route path="/search" element={<SearchPage />}>
-        <Route path=":keyword" />
+        <Route path=":keyword" element={<SearchPage />} />
       </Route>
       <Route path="/*" element={<Navigate to="home" />} />
     </Routes>
