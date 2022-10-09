@@ -4,6 +4,7 @@ import ReactPlayer from "react-player/youtube";
 import { detailAPI } from "../../api/detailAPI";
 import { detailVideo } from "../../models/detailVideo";
 import "./DetailVideo.css";
+import { errorSwal } from "../../shared/alert";
 const DetailVideo = () => {
   const params = useParams<{ id: string }>();
   const [dataDetailVideo, setDataDetailVideo] = useState<detailVideo>();
@@ -16,6 +17,7 @@ const DetailVideo = () => {
       });
     } catch (error) {
       console.log(error);
+      errorSwal();
     }
   };
 
