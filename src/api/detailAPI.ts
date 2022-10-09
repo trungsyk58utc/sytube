@@ -6,7 +6,7 @@ export const detailAPI = {
   getDetail(urlVideo: string): Promise<detailVideo> {
     const params = {
       key: accesstoken,
-      part: "snippet",
+      part: "snippet, statistics",
       type: "video",
       id: urlVideo,
     };

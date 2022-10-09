@@ -12,6 +12,12 @@ export interface detailVideoItems {
   etag: string;
   id: string;
   snippet: detailVideoSnippet;
+  statistics: {
+    commentCount: string;
+    favoriteCount: string;
+    likeCount: string;
+    viewCount: string;
+  };
 }
 
 export interface detailVideoSnippet {

@@ -4,6 +4,7 @@ import { homeAPI } from "../../api/homeAPI";
 import { search } from "../../models/search";
 import { useNavigate } from "react-router-dom";
 import "./SearchPage.css";
+import { errorSwal } from "../../shared/alert";
 
 const SearchPage = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const SearchPage = () => {
         setListSearchResults(data);
       });
     } catch (error) {
+      errorSwal();
       console.log(error);
     }
   };
@@ -25,7 +27,7 @@ const SearchPage = () => {
 
   return (
     <div className="container">
-      <h4>Kết quả cho "{params.keyword}"</h4>
+      <h4 className="results-text mt-3 mb-3">Kết quả cho "{params.keyword}"</h4>
       {listSearchResults?.items.map((data, index) => (
         <div className="row mb-3" key={index}>
           <div className="col-3">

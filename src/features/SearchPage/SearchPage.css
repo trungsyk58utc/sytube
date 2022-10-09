@@ -18,3 +18,7 @@
 .img-interface {
   cursor: pointer;
 }
+
+.results-text {
+  text-align: left;
+}

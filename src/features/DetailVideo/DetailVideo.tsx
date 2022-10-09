@@ -11,6 +11,7 @@ const DetailVideo = () => {
   const fetchListDetailVideo = async (id: any) => {
     try {
       await detailAPI.getDetail(id).then((response) => {
+        document.title = response.items[0].snippet.title;
         setDataDetailVideo(response);
       });
     } catch (error) {
@@ -24,25 +25,25 @@ const DetailVideo = () => {
 
   return (
     <div className="mb-5">
-      <div className="d-flex justify-content-center mt-5">
+      <div className="d-flex justify-content-center mt-3">
         <ReactPlayer
           url={`https://www.youtube.com/embed/${params.id}`}
           controls={true}
-          width="70%"
+          width="65%"
           height="600px"
           playing={true}
         />
       </div>
-      <div className="mx-auto mt-2" style={{ width: "70%", height: "100%" }}>
+      <div className="mx-auto mt-2" style={{ width: "65%", height: "100%" }}>
         <div className="title-detail-video h3">
           {dataDetailVideo?.items[0].snippet.title}
         </div>
+        <div className="publish-date">
+          {dataDetailVideo?.items[0].statistics.viewCount.toLocaleString()} lượt
+          xem - {dataDetailVideo?.items[0].snippet.publishedAt.split("T")[0]}
+        </div>
         <div className="channel-title">
           Đăng bởi: {dataDetailVideo?.items[0].snippet.channelTitle}
-        </div>
-        <div className="publish-date">
-          Ngày xuất bản:{" "}
-          {dataDetailVideo?.items[0].snippet.publishedAt.split("T")[0]}
         </div>
         <hr />
         <div className="description-text">
