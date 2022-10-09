@@ -25,6 +25,8 @@ const DetailVideo = () => {
     fetchListDetailVideo(params.id);
   }, [params.id]);
 
+  console.log(dataDetailVideo?.items[0]);
+
   return (
     <div className="mb-5">
       <div className="d-flex justify-content-center mt-3">
@@ -42,7 +44,10 @@ const DetailVideo = () => {
         </div>
         <div className="publish-date">
           {dataDetailVideo?.items[0].statistics.viewCount.toLocaleString()} lượt
-          xem - {dataDetailVideo?.items[0].snippet.publishedAt.split("T")[0]}
+          xem | {dataDetailVideo?.items[0].snippet.publishedAt.split("T")[0]} |{" "}
+          <i className="fa-solid fa-thumbs-up"></i>
+          {dataDetailVideo?.items[0].statistics.likeCount} |{" "}
+          {dataDetailVideo?.items[0].statistics.commentCount} comment
         </div>
         <div className="channel-title">
           Đăng bởi: {dataDetailVideo?.items[0].snippet.channelTitle}
