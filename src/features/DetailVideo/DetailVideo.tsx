@@ -1,31 +1,22 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
-import { detailAPI } from "../../api/detailAPI";
-import { detailVideo } from "../../models/detailVideo";
 import "./DetailVideo.css";
-import { errorSwal } from "../../shared/alert";
+import { useAppDispatch } from "../../app/hooks";
+import { getListDetail } from "./detailSlice";
+import { useSelector } from "react-redux";
+import { RootState } from "../../app/store";
 const DetailVideo = () => {
   const params = useParams<{ id: string }>();
-  const [dataDetailVideo, setDataDetailVideo] = useState<detailVideo>();
-
-  const fetchListDetailVideo = async (id: any) => {
-    try {
-      await detailAPI.getDetail(id).then((response) => {
-        document.title = response.items[0].snippet.title;
-        setDataDetailVideo(response);
-      });
-    } catch (error) {
-      console.log(error);
-      errorSwal();
-    }
-  };
+  const dispatch = useAppDispatch();
+  const items = useSelector((state: RootState) => state.detail.items);
 
   useEffect(() => {
-    fetchListDetailVideo(params.id);
-  }, [params.id]);
-
-  console.log(dataDetailVideo?.items[0]);
+    const promise = dispatch(getListDetail(params.id));
+    return () => {
+      promise.abort();
+    };
+  }, [dispatch, params.id]);
 
   return (
     <div className="mb-5">
@@ -38,25 +29,26 @@ const DetailVideo = () => {
           playing={true}
         />
       </div>
-      <div className="mx-auto mt-2" style={{ width: "65%", height: "100%" }}>
-        <div className="title-detail-video h3">
-          {dataDetailVideo?.items[0].snippet.title}
+      {items.map((item) => (
+        <div
+          key={item.id}
+          className="mx-auto mt-2"
+          style={{ width: "65%", height: "100%" }}
+        >
+          <div className="title-detail-video h3">{item.snippet.title}</div>
+          <div className="publish-date">
+            {item.statistics.viewCount.toLocaleString()} lượt xem |{" "}
+            {item.snippet.publishedAt.split("T")[0]} |{" "}
+            <i className="fa-solid fa-thumbs-up"></i>
+            {item.statistics.likeCount} | {item.statistics.commentCount} comment
+          </div>
+          <div className="channel-title">
+            Đăng bởi: {item.snippet.channelTitle}
+          </div>
+          <hr />
+          <div className="description-text">{item.snippet.description}</div>
         </div>
-        <div className="publish-date">
-          {dataDetailVideo?.items[0].statistics.viewCount.toLocaleString()} lượt
-          xem | {dataDetailVideo?.items[0].snippet.publishedAt.split("T")[0]} |{" "}
-          <i className="fa-solid fa-thumbs-up"></i>
-          {dataDetailVideo?.items[0].statistics.likeCount} |{" "}
-          {dataDetailVideo?.items[0].statistics.commentCount} comment
-        </div>
-        <div className="channel-title">
-          Đăng bởi: {dataDetailVideo?.items[0].snippet.channelTitle}
-        </div>
-        <hr />
-        <div className="description-text">
-          {dataDetailVideo?.items[0].snippet.description}
-        </div>
-      </div>
+      ))}
     </div>
   );
 };

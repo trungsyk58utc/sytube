@@ -1,8 +1,11 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
+import detailReducer from "../features/DetailVideo/detailSlice";
+import searchReducer from "../features/SearchPage/searchSlice";
 
 export const store = configureStore({
   reducer: {
-    // counter: counterReducer,
+    search: searchReducer,
+    detail: detailReducer,
   },
 });
 
