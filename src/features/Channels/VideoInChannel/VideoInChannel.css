@@ -1,0 +1,11 @@
+.card-text {
+  text-align: left;
+}
+
+.card-title {
+  text-align: left;
+}
+
+.card.me-4 {
+  padding: 0;
+}

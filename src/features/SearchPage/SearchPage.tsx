@@ -1,61 +1,69 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import "./SearchPage.css";
-import { useAppDispatch } from "../../app/hooks";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
-import { getList } from "./searchSlice";
 import Loading from "../../component/Loading/Loading";
+// import { useGetSearchQuery } from "./search.services";
+import { useQuery } from "@tanstack/react-query";
+import { homeAPI } from "../../api/homeAPI";
 
 const SearchPage = () => {
   const navigate = useNavigate();
-  const params = useParams<{ keyword: string }>();
-  const dispatch = useAppDispatch();
-  const listSearch = useSelector(
-    (state: RootState) => state.search.listSearchResults
-  );
-  const loading = useSelector((state: RootState) => state.search.loading);
+  const params = useParams<{ keyword: any }>();
+  // const { data, isLoading } = useGetSearchQuery(params.keyword);
+  const { data, isLoading } = useQuery({
+    queryKey: ["search", params.keyword],
+    queryFn: () => homeAPI.getSearch(params.keyword),
+  });
 
-  useEffect(() => {
-    const promise = dispatch(getList(params.keyword));
-    return () => {
-      promise.abort();
-    };
-  }, [dispatch, params.keyword]);
+  console.log(data);
 
   return (
     <div className="container">
-      {loading ? (
-        <>
+      {isLoading && <Loading />}
+      {!isLoading && (
+        <span>
           <h4 className="results-text mt-3 mb-3">
             Kết quả cho "{params.keyword}"
           </h4>
-          {listSearch.map((data, index) => (
+          {data?.items.map((video, index) => (
             <div className="row mb-3" key={index}>
               <div className="col-3">
                 <img
-                  src={data.snippet.thumbnails.medium.url}
+                  src={video.snippet.thumbnails.medium.url}
                   className="img-interface"
                   alt="High"
-                  onClick={() => navigate(`/detail/${data.id.videoId}`)}
+                  onClick={() => navigate(`/detail/${video.id.videoId}`)}
                 />
               </div>
               <div className="col-9">
                 <div
                   className="title h4"
-                  onClick={() => navigate(`/detail/${data.id.videoId}`)}
+                  onClick={() =>
+                    navigate(
+                      video.id.kind.includes("video")
+                        ? `/detail/${video.id.videoId}`
+                        : `/channels/${video.snippet.channelId}`
+                    )
+                  }
                 >
-                  {data.snippet.title}
+                  {video.snippet.title}
                 </div>
-                <p className="channel-title">{data.snippet.channelTitle}</p>
-                <p className="description">{data.snippet.description}</p>
+                {video.id.kind.includes("video") && (
+                  <p
+                    className="channel-title"
+                    onClick={() =>
+                      navigate(`/channels/${video.snippet.channelId}`)
+                    }
+                  >
+                    {video.snippet.channelTitle}
+                  </p>
+                )}
+                <p className="description">{video.snippet.description}</p>
               </div>
             </div>
           ))}
-        </>
-      ) : (
-        <Loading />
+        </span>
       )}
     </div>
   );

@@ -11,11 +11,11 @@ const axiosCustom = axios.create({
 axiosCustom.interceptors.request.use(
   function (config: AxiosRequestConfig) {
     // check token
-    // let accesstoken = "AIzaSyCJtat8DqOkXWzGW-7OrxwXjIF82jNS9IQ";
+    let accesstoken = "AIzaSyCJtat8DqOkXWzGW-7OrxwXjIF82jNS9IQ";
     // Do something before request is sent
     config.headers = {
       Accept: "application/json",
-      // Authorization: `Bearer ${accesstoken}`,
+      Authorization: `Bearer ${accesstoken}`,
     };
     return config;
   },

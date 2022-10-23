@@ -37,7 +37,7 @@ export interface searchItems {
 
 export interface search {
   etag: string;
-  items: Array<searchItems>;
+  items: searchItems[];
   kind: string;
   nextPageToken: string;
   pageInfo: {

@@ -9,18 +9,24 @@ import "./assets/css/grid.css";
 import "./assets/css/index.css";
 import "./assets/css/theme.css";
 import { BrowserRouter } from "react-router-dom";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
+const queryClient = new QueryClient();
 
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
+  <BrowserRouter>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
         <App />
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+        <ReactQueryDevtools initialIsOpen={false} />
+      </QueryClientProvider>
+    </Provider>
+  </BrowserRouter>
+  // <React.StrictMode>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function
