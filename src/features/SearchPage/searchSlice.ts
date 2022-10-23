@@ -8,7 +8,7 @@ interface SearchState {
 }
 const initialState: SearchState = {
   listSearchResults: [],
-  loading: false,
+  loading: true,
 };
 
 export const getList = createAsyncThunk(
@@ -33,14 +33,14 @@ const searchSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(getList.pending, (state) => {
-      state.loading = false;
+      state.loading = true;
     });
     builder.addCase(getList.fulfilled, (state, action) => {
       state.listSearchResults = action.payload;
-      state.loading = true;
+      state.loading = false;
     });
     builder.addCase(getList.rejected, (state, action) => {
-      state.loading = true;
+      state.loading = false;
     });
   },
 });

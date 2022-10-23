@@ -18,6 +18,8 @@ const DetailVideo = () => {
     };
   }, [dispatch, params.id]);
 
+  console.log(items);
+
   return (
     <div className="mb-5">
       <div className="d-flex justify-content-center mt-3">

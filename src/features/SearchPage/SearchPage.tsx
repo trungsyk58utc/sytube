@@ -26,7 +26,7 @@ const SearchPage = () => {
 
   return (
     <div className="container">
-      {loading ? (
+      {!loading ? (
         <>
           <h4 className="results-text mt-3 mb-3">
             Kết quả cho "{params.keyword}"
