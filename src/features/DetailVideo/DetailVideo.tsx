@@ -1,24 +1,11 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import "./DetailVideo.css";
-import { useAppDispatch } from "../../app/hooks";
-import { getListDetail } from "./detailSlice";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store";
+import { useGetDetailQuery } from "./detail.service";
 const DetailVideo = () => {
-  const params = useParams<{ id: string }>();
-  const dispatch = useAppDispatch();
-  const items = useSelector((state: RootState) => state.detail.items);
-
-  useEffect(() => {
-    const promise = dispatch(getListDetail(params.id));
-    return () => {
-      promise.abort();
-    };
-  }, [dispatch, params.id]);
-
-  console.log(items);
+  const params = useParams<{ id: any }>();
+  const { data } = useGetDetailQuery(params.id);
 
   return (
     <div className="mb-5">
@@ -31,7 +18,7 @@ const DetailVideo = () => {
           playing={true}
         />
       </div>
-      {items.map((item) => (
+      {data?.items.map((item) => (
         <div
           key={item.id}
           className="mx-auto mt-2"
