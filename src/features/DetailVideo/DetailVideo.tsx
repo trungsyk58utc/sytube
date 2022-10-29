@@ -1,10 +1,11 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import ReactPlayer from "react-player/youtube";
 import "./DetailVideo.css";
 import { useGetDetailQuery } from "./detail.service";
 const DetailVideo = () => {
   const params = useParams<{ id: any }>();
+  const navigate = useNavigate();
   const { data } = useGetDetailQuery(params.id);
 
   return (
@@ -31,7 +32,10 @@ const DetailVideo = () => {
             <i className="fa-solid fa-thumbs-up"></i>
             {item.statistics.likeCount} | {item.statistics.commentCount} comment
           </div>
-          <div className="channel-title">
+          <div
+            className="channel-title"
+            onClick={() => navigate(`/channels/${item.snippet.channelId}`)}
+          >
             Đăng bởi: {item.snippet.channelTitle}
           </div>
           <hr />

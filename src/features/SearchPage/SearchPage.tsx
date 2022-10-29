@@ -10,7 +10,6 @@ const SearchPage = () => {
   const params = useParams<{ keyword: any }>();
   const { data, isLoading } = useGetSearchQuery(params.keyword);
 
-  console.log(data, isLoading);
   return (
     <div className="container">
       {isLoading && <Loading />}
@@ -32,11 +31,26 @@ const SearchPage = () => {
               <div className="col-9">
                 <div
                   className="title h4"
-                  onClick={() => navigate(`/detail/${video.id.videoId}`)}
+                  onClick={() =>
+                    navigate(
+                      video.id.kind.includes("video")
+                        ? `/detail/${video.id.videoId}`
+                        : `/channels/${video.snippet.channelId}`
+                    )
+                  }
                 >
                   {video.snippet.title}
                 </div>
-                <p className="channel-title">{video.snippet.channelTitle}</p>
+                {video.id.kind.includes("video") && (
+                  <p
+                    className="channel-title"
+                    onClick={() =>
+                      navigate(`/channels/${video.snippet.channelId}`)
+                    }
+                  >
+                    {video.snippet.channelTitle}
+                  </p>
+                )}
                 <p className="description">{video.snippet.description}</p>
               </div>
             </div>

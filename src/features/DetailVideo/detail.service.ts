@@ -8,7 +8,7 @@ export const detailService = createApi({
     baseUrl: "https://www.googleapis.com/youtube/v3",
   }),
   endpoints: (builder) => ({
-    getDetail: builder.query<detailVideo, object>({
+    getDetail: builder.query<detailVideo, void>({
       query: (idVideo: any) =>
         `/videos?key=${accesstoken}&part=snippet,statistics&type=video&id=${idVideo}`,
     }),

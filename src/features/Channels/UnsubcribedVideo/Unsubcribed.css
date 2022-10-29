@@ -1,0 +1,19 @@
+.brand-title {
+  text-align: left;
+}
+
+.brand-info {
+  text-align: left;
+}
+
+.brand-video-description {
+  text-align: left;
+  white-space: pre-line;
+  max-height: 120px;
+  overflow: hidden;
+}
+
+.continue {
+  text-align: left;
+  cursor: pointer;
+}

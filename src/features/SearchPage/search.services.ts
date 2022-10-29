@@ -10,7 +10,7 @@ export const searchService = createApi({
   endpoints: (builder) => ({
     getSearch: builder.query<search, object>({
       query: (searchText: any) =>
-        `/search?key=${accesstoken}&part=snippet&type=video&q=${searchText}&maxResults=15`,
+        `/search?key=${accesstoken}&part=snippet&type=video,channel&q=${searchText}&maxResults=15`,
     }),
   }),
 });

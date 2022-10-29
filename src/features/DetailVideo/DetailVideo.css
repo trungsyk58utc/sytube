@@ -11,3 +11,7 @@
 .publish-date {
   text-align: left;
 }
+
+.channel-title {
+  cursor: pointer;
+}
