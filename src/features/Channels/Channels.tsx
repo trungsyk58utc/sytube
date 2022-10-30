@@ -111,10 +111,10 @@ const Channels = () => {
           <UnsubcribedVideo />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Item Two
+          Video
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Item Three
+          Giới thiệu
         </TabPanel>
       </Box>
     </div>

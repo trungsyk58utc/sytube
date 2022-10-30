@@ -9,10 +9,17 @@ export const channelService = createApi({
   }),
   endpoints: (builder) => ({
     getChannel: builder.query<channel, void>({
-      query: (idChannel: any) =>
-        `/channels?key=${accesstoken}&part=statistics,brandingSettings,snippet&id=${idChannel}`,
+      query: (idChannel: any) => ({
+        url: "channels",
+        params: {
+          key: accesstoken,
+          part: "statistics,brandingSettings,snippet",
+          id: idChannel,
+        },
+      }),
     }),
   }),
 });
 
 export const { useGetChannelQuery } = channelService;
+//`/channels?key=${accesstoken}&part=statistics,brandingSettings,snippet&id=${idChannel}`,

@@ -9,10 +9,18 @@ export const detailService = createApi({
   }),
   endpoints: (builder) => ({
     getDetail: builder.query<detailVideo, void>({
-      query: (idVideo: any) =>
-        `/videos?key=${accesstoken}&part=snippet,statistics&type=video&id=${idVideo}`,
+      query: (idVideo: any) => ({
+        url: "videos",
+        params: {
+          key: accesstoken,
+          part: "snippet,statistics",
+          type: "video",
+          id: idVideo,
+        },
+      }),
     }),
   }),
 });
 
 export const { useGetDetailQuery } = detailService;
+//`/videos?key=${accesstoken}&part=snippet,statistics&type=video&id=${idVideo}`,
