@@ -1,4 +1,4 @@
-export interface activities {
+export interface activitiesItem {
   kind: string;
   etag: string;
   id: string;
@@ -8,7 +8,27 @@ export interface activities {
     title: string;
     description: string;
     thumbnails: {
-      key: {
+      default: {
+        url: string;
+        width: string;
+        height: string;
+      };
+      high: {
+        url: string;
+        width: string;
+        height: string;
+      };
+      maxres: {
+        url: string;
+        width: string;
+        height: string;
+      };
+      medium: {
+        url: string;
+        width: string;
+        height: string;
+      };
+      standard: {
         url: string;
         width: string;
         height: string;
@@ -84,5 +104,16 @@ export interface activities {
     channelItem: {
       resourceId: {};
     };
+  };
+}
+
+export interface activities {
+  etag: string;
+  items: activitiesItem[];
+  kind: string;
+  nextPageToken: string;
+  pageInfo: {
+    totalResults: number;
+    resultsPerPage: number;
   };
 }

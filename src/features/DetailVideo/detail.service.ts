@@ -23,4 +23,3 @@ export const detailService = createApi({
 });
 
 export const { useGetDetailQuery } = detailService;
-//`/videos?key=${accesstoken}&part=snippet,statistics&type=video&id=${idVideo}`,

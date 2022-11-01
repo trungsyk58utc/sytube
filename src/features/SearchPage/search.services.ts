@@ -24,4 +24,3 @@ export const searchService = createApi({
 });
 
 export const { useGetSearchQuery } = searchService;
-// url: `/search?key=${accesstoken}&part=snippet&type=video,channel&q=${searchText}&maxResults=15`,

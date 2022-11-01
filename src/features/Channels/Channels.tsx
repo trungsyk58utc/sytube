@@ -11,6 +11,8 @@ import { useGetChannelQuery } from "./channel.service";
 import "./Channels.css";
 import { setUnsubcribedTrailer } from "./channelSlice";
 import UnsubcribedVideo from "./UnsubcribedVideo/UnsubcribedVideo";
+import VideoInChannel from "./VideoInChannel/VideoInChannel";
+import ChannelIntroduction from "./ChannelIntroduction/ChannelIntroduction";
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -22,7 +24,8 @@ function TabPanel(props: TabPanelProps) {
   const { children, value, index, ...other } = props;
 
   return (
-    <div
+    <Typography
+      component="span"
       role="tabpanel"
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
@@ -31,10 +34,10 @@ function TabPanel(props: TabPanelProps) {
     >
       {value === index && (
         <Box sx={{ p: 3 }}>
-          <Typography>{children}</Typography>
+          <Typography component="span">{children}</Typography>
         </Box>
       )}
-    </div>
+    </Typography>
   );
 }
 
@@ -111,10 +114,10 @@ const Channels = () => {
           <UnsubcribedVideo />
         </TabPanel>
         <TabPanel value={value} index={1}>
-          Video
+          <VideoInChannel />
         </TabPanel>
         <TabPanel value={value} index={2}>
-          Giới thiệu
+          <ChannelIntroduction />
         </TabPanel>
       </Box>
     </div>
